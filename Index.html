@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KJ's Driving Range – Monroe, NC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2e44;
+      --navy-dark: #0f1e2e;
+      --green: #2d6a3f;
+      --green-light: #3a8050;
+      --green-pale: #eaf3ee;
+      --gold: #c8a84b;
+      --gold-light: #f5e9c8;
+      --white: #ffffff;
+      --off: #f8f7f4;
+      --text: #1a1a1a;
+      --muted: #5a5a5a;
+      --border: #e0ddd6;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--navy-dark);
+      padding: 8px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+    .topbar a { color: var(--gold); text-decoration: none; }
+    .topbar span { margin: 0 16px; opacity: 0.4; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      text-decoration: none;
+    }
+    .logo-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--gold);
+      flex-shrink: 0;
+    }
+    .logo-circle span {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a4fa0;
+      letter-spacing: -0.5px;
+    }
+    .logo-text { line-height: 1.2; }
+    .logo-text .name { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; letter-spacing: 0.3px; }
+    .logo-text .sub { font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; }
+
+    nav ul { list-style: none; display: flex; align-items: center; gap: 4px; }
+    nav ul li a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 28px 14px;
+      display: block;
+      transition: color 0.2s;
+      letter-spacing: 0.3px;
+    }
+    nav ul li a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--navy-dark) !important;
+      border-radius: 4px;
+      padding: 10px 20px !important;
+      margin-left: 8px;
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: #d4b45a !important; color: var(--navy-dark) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #1e3a20 100%);
+      padding: 100px 40px 90px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 58px;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      position: relative;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p {
+      color: rgba(255,255,255,0.75);
+      font-size: 17px;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      position: relative;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy-dark);
+      padding: 14px 36px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-gold:hover { background: #d4b45a; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: #fff;
+      padding: 13px 32px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      transition: border-color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.85); }
+
+    /* ── QUICK INFO BAR ── */
+    .info-bar {
+      background: var(--green);
+      padding: 22px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .info-item { display: flex; align-items: center; gap: 10px; color: #fff; }
+    .info-item svg { opacity: 0.8; flex-shrink: 0; }
+    .info-item .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+    .info-item .val { font-size: 14px; font-weight: 600; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 40px; }
+    .section-inner { max-width: 1060px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    h2 { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--navy); margin-bottom: 14px; line-height: 1.15; }
+    .lead { font-size: 16px; color: var(--muted); max-width: 540px; line-height: 1.75; margin-bottom: 40px; }
+    .divider { width: 48px; height: 3px; background: var(--gold); border-radius: 2px; margin: 16px 0 32px; }
+
+    /* ── ABOUT ── */
+    .about { background: var(--off); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .about-text p { font-size: 15.5px; color: var(--muted); line-height: 1.85; margin-bottom: 16px; }
+    .about-visual {
+      background: var(--navy);
+      border-radius: 8px;
+      padding: 48px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-visual::before {
+      content: '';
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.1;
+    }
+    .about-visual .big-icon { font-size: 64px; margin-bottom: 16px; display: block; }
+    .about-visual h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: #fff; margin-bottom: 8px; }
+    .about-visual p { color: rgba(255,255,255,0.65); font-size: 14px; }
+    .stat-row { display: flex; gap: 24px; margin-top: 32px; }
+    .stat { background: var(--white); border-radius: 6px; padding: 20px; flex: 1; border-left: 3px solid var(--gold); }
+    .stat .num { font-family: 'Playfair Display', serif; font-size: 30px; color: var(--navy); }
+    .stat .desc { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+    /* ── AMENITIES ── */
+    .amenities { background: var(--white); }
+    .amenities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .amenity {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px 24px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .amenity:hover { border-color: var(--green); box-shadow: 0 4px 20px rgba(45,106,63,0.1); }
+    .amenity-icon {
+      width: 48px; height: 48px;
+      background: var(--green-pale);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+    .amenity h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .amenity p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* ── LESSONS ── */
+    .lessons { background: var(--navy); }
+    .lessons .eyebrow { color: var(--gold); }
+    .lessons h2 { color: #fff; }
+    .lessons .lead { color: rgba(255,255,255,0.65); }
+    .lessons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 40px; }
+    .lesson-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 32px 24px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .lesson-card:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); }
+    .lesson-card .tag {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+    .lesson-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; margin-bottom: 10px; }
+    .lesson-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 20px; }
+    .lesson-card .price { font-size: 22px; font-weight: 700; color: var(--gold); }
+    .lesson-card .price span { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.4); }
+
+    .book-form-wrap {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 40px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .book-form-wrap h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: #fff; margin-bottom: 6px; }
+    .book-form-wrap .sub { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      color: #fff;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group select option { background: var(--navy-dark); color: #fff; }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--navy-dark);
+      border: none;
+      border-radius: 4px;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .form-submit:hover { background: #d4b45a; }
+
+    /* ── HOURS & PRICING ── */
+    .hours-pricing { background: var(--off); }
+    .hp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    table.hours-tbl { width: 100%; border-collapse: collapse; }
+    table.hours-tbl tr { border-bottom: 1px solid var(--border); }
+    table.hours-tbl tr:last-child { border-bottom: none; }
+    table.hours-tbl td { padding: 13px 0; font-size: 15px; }
+    table.hours-tbl td:first-child { color: var(--muted); }
+    table.hours-tbl td:last-child { text-align: right; font-weight: 600; color: var(--navy); }
+    .price-list { display: flex; flex-direction: column; gap: 14px; }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 18px 22px;
+    }
+    .price-row .name { font-weight: 600; font-size: 15px; color: var(--navy); }
+    .price-row .balls { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .price-row .amount { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--green); }
+    .note { font-size: 12px; color: var(--muted); margin-top: 12px; font-style: italic; }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .contact-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .contact-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .contact-card p { font-size: 14.5px; color: var(--muted); line-height: 1.8; }
+    .contact-card a { color: var(--green); text-decoration: none; font-weight: 600; }
+    .contact-card a:hover { text-decoration: underline; }
+    .map-placeholder {
+      background: var(--off);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 60px 40px;
+      text-align: center;
+      grid-column: 1 / -1;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .map-placeholder strong { display: block; color: var(--navy); font-size: 17px; margin-bottom: 8px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-dark);
+      padding: 40px 40px 24px;
+    }
+    .footer-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo .name { font-family: 'Playfair Display', serif; font-size: 18px; color: #fff; }
+    .footer-logo .sub { font-size: 12px; color: var(--gold); margin-top: 2px; letter-spacing: 1px; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.5); font-size: 13px; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      max-width: 1060px;
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .topbar { display: none; }
+      nav { padding: 0 20px; }
+      nav ul { gap: 0; }
+      nav ul li a { padding: 20px 10px; font-size: 12px; }
+      .hero { padding: 60px 20px; }
+      .hero h1 { font-size: 36px; }
+      .info-bar { gap: 28px; padding: 20px; }
+      section { padding: 56px 20px; }
+      .about-grid, .hp-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+      .form-row { grid-template-columns: 1fr; }
+      h2 { font-size: 30px; }
+      .stat-row { flex-direction: column; gap: 12px; }
+      .logo-text .name { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>Monroe, NC &nbsp;|&nbsp; <a href="tel:+17045550000">(704) 555-0000</a> &nbsp;|&nbsp; <a href="mailto:info@kjsdrivingrange.com">info@kjsdrivingrange.com</a></div>
+  <div>Mon–Fri: 9am–8pm &nbsp;<span>|</span>&nbsp; Sat: 8am–9pm &nbsp;<span>|</span>&nbsp; Sun: 10am–6pm</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo-wrap" href="#">
+    <div class="logo-circle">
+      <span>KJs</span>
+    </div>
+    <div class="logo-text">
+      <div class="name">KJ's Driving Range</div>
+      <div class="sub">Monroe, North Carolina</div>
+    </div>
+  </a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#amenities">Amenities</a></li>
+    <li><a href="#lessons">Lessons</a></li>
+    <li><a href="#hours">Hours &amp; Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#lessons" class="nav-cta">Book a Lesson</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Monroe's Premier Driving Range</div>
+  <h1>Tee Up Your Best <em>Game</em></h1>
+  <p>Whether you're just starting out or sharpening your swing, KJ's Driving Range is Monroe's home for golfers of every level.</p>
+  <div class="hero-btns">
+    <a href="#lessons" class="btn-gold">Book a Lesson</a>
+    <a href="#hours" class="btn-ghost">Hours &amp; Pricing</a>
+  </div>
+</div>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-item">
+    <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    <div><div class="label">Hours Today</div><div class="val">9:00 AM – 8:00 PM</div></div>
+  </div>
+  <div class="info-item">
+    <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <div><div class="label">Location</div><div class="val">Monroe, NC</div></div>
+  </div>
+  <div class="info-item">
+    <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.93 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.84 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <div><div class="label">Phone</div><div class="val">(704) 555-0000</div></div>
+  </div>
+  <div class="info-item">
+    <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
+    <div><div class="label">Lessons</div><div class="val">All Skill Levels</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="eyebrow">About Us</div>
+        <h2>Monroe's Home for Golf</h2>
+        <div class="divider"></div>
+        <p>KJ's Driving Range has been serving the Monroe community with a welcoming, well-kept facility for golfers of every skill level. From beginners picking up a club for the first time to competitive players dialing in their game, we provide the space and support to help everyone improve.</p>
+        <p>Our range is designed to be accessible, enjoyable, and affordable — because we believe great golf shouldn't be reserved for a select few. Come out, hit some balls, and see why locals keep coming back.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="num">All Ages</div><div class="desc">Welcome</div></div>
+          <div class="stat"><div class="num">Pro Staff</div><div class="desc">On Site</div></div>
+          <div class="stat"><div class="num">Monroe, NC</div><div class="desc">Locally Owned</div></div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <span class="big-icon">🏌️</span>
+        <h3>KJ's Driving Range</h3>
+        <p>A locally owned and operated facility proud to be part of the Monroe, NC community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amenities" id="amenities">
+  <div class="section-inner">
+    <div class="eyebrow">Facilities</div>
+    <h2>What We Offer</h2>
+    <div class="divider"></div>
+    <p class="lead">Everything you need for a great session at the range — no frills, no fuss, just good golf.</p>
+    <div class="amenities-grid">
+      <div class="amenity">
+        <div class="amenity-icon">🎯</div>
+        <h3>Multiple Tee Stations</h3>
+        <p>Plenty of hitting stations so you and your group can practice side by side without waiting.</p>
+      </div>
+      <div class="amenity">
+        <div class="amenity-icon">⛳</div>
+        <h3>Range Balls Included</h3>
+        <p>Balls are included with every bucket purchase — just show up and start swinging.</p>
+      </div>
+      <div class="amenity">
+        <div class="amenity-icon">🌳</div>
+        <h3>Outdoor Setting</h3>
+        <p>Fresh air and wide open green space make every visit feel like a proper day out.</p>
+      </div>
+      <div class="amenity">
+        <div class="amenity-icon">👨‍👩‍👧</div>
+        <h3>Family Friendly</h3>
+        <p>A relaxed, welcoming environment perfect for introducing kids to the game.</p>
+      </div>
+      <div class="amenity">
+        <div class="amenity-icon">🎓</div>
+        <h3>Professional Instruction</h3>
+        <p>Book one-on-one or group lessons with our experienced teaching staff.</p>
+      </div>
+      <div class="amenity">
+        <div class="amenity-icon">🅿️</div>
+        <h3>Easy Parking</h3>
+        <p>Convenient, ample parking right next to the range — no hassle getting started.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSONS -->
+<section class="lessons" id="lessons">
+  <div class="section-inner">
+    <div class="eyebrow">Golf Lessons</div>
+    <h2>Improve Your Game</h2>
+    <div class="divider" style="background:var(--gold);"></div>
+    <p class="lead">Work one-on-one with our experienced instructors. Whether you're picking up a club for the first time or fixing a persistent slice, we'll help you get better.</p>
+
+    <div class="lessons-grid">
+      <div class="lesson-card">
+        <div class="tag">Beginner</div>
+        <h3>Introductory Lesson</h3>
+        <p>Perfect for first-timers. Learn grip, stance, and the basics of a solid swing in a relaxed, pressure-free setting.</p>
+        <div class="price">$45 <span>/ session</span></div>
+      </div>
+      <div class="lesson-card">
+        <div class="tag">All Levels</div>
+        <h3>Private Lesson</h3>
+        <p>One-on-one instruction tailored to your specific goals. Improve your full swing, short game, or course management.</p>
+        <div class="price">$65 <span>/ session</span></div>
+      </div>
+      <div class="lesson-card">
+        <div class="tag">Junior</div>
+        <h3>Junior Lesson</h3>
+        <p>Fun, engaging instruction for players under 18. Build confidence and fundamentals in a supportive environment.</p>
+        <div class="price">$40 <span>/ session</span></div>
+      </div>
+      <div class="lesson-card">
+        <div class="tag">Best Value</div>
+        <h3>Lesson Package</h3>
+        <p>Buy 4 private lessons and get your 5th lesson free. Ideal for players committed to making real improvement.</p>
+        <div class="price">$240 <span>/ 5 lessons</span></div>
+      </div>
+    </div>
+
+    <div class="book-form-wrap">
+      <h3>Book a Lesson</h3>
+      <p class="sub">Fill out the form below and we'll get back to you to confirm your time.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="(704) 555-0000" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@email.com" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Lesson Type</label>
+          <select>
+            <option value="">Select a lesson...</option>
+            <option>Introductory Lesson – $45</option>
+            <option>Private Lesson – $65</option>
+            <option>Junior Lesson – $40</option>
+            <option>Lesson Package (5 for 4) – $240</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date" />
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:16px;">
+        <label>Additional Notes</label>
+        <textarea placeholder="Any details about your skill level, goals, or scheduling preferences..."></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('Thanks! We\'ll be in touch to confirm your lesson.')">Request Lesson Booking</button>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS & PRICING -->
+<section class="hours-pricing" id="hours">
+  <div class="section-inner">
+    <div class="eyebrow">Hours &amp; Pricing</div>
+    <h2>Plan Your Visit</h2>
+    <div class="divider"></div>
+    <div class="hp-grid">
+      <div>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:24px;">We're open most days — walk-ins always welcome. No reservation needed for range time.</p>
+        <table class="hours-tbl">
+          <tr><td>Monday – Friday</td><td>9:00 AM – 8:00 PM</td></tr>
+          <tr><td>Saturday</td><td>8:00 AM – 9:00 PM</td></tr>
+          <tr><td>Sunday</td><td>10:00 AM – 6:00 PM</td></tr>
+        </table>
+        <p class="note">Hours may vary on public holidays. Call ahead to confirm.</p>
+      </div>
+      <div>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:24px;">Simple bucket pricing — no memberships, no sign-ups. Just pick your size and start hitting.</p>
+        <div class="price-list">
+          <div class="price-row">
+            <div><div class="name">Small Bucket</div><div class="balls">~50 balls</div></div>
+            <div class="amount">$7</div>
+          </div>
+          <div class="price-row">
+            <div><div class="name">Large Bucket</div><div class="balls">~100 balls</div></div>
+            <div class="amount">$12</div>
+          </div>
+          <div class="price-row">
+            <div><div class="name">Jumbo Bucket</div><div class="balls">~150 balls</div></div>
+            <div class="amount">$17</div>
+          </div>
+        </div>
+        <p class="note">* Pricing is a placeholder — update with your actual rates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="eyebrow">Contact &amp; Location</div>
+    <h2>Get in Touch</h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h3>Our Location</h3>
+          <p>KJ's Driving Range<br />Monroe, NC<br /><br /><a href="https://maps.google.com" target="_blank">Get Directions →</a></p>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div>
+          <h3>Call or Email</h3>
+          <p>
+            Phone: <a href="tel:+17045550000">(704) 555-0000</a><br />
+            Email: <a href="mailto:info@kjsdrivingrange.com">info@kjsdrivingrange.com</a><br /><br />
+            Walk-ins always welcome!
+          </p>
+        </div>
+      </div>
+      <div class="map-placeholder">
+        <strong>📍 KJ's Driving Range – Monroe, NC</strong>
+        Replace this block with a Google Maps embed for your address.<br />
+        <small>In your Google Maps listing, click Share → Embed a map → Copy the iframe code and paste it here.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="name">KJ's Driving Range</div>
+      <div class="sub">Monroe, North Carolina</div>
+    </div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#lessons">Lessons</a>
+      <a href="#hours">Hours &amp; Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 KJ's Driving Range · Monroe, NC · All rights reserved</div>
+</footer>
+
+</body>
+</html>
